@@ -6,7 +6,6 @@ export async function GET(req: NextRequest) {
   const limit = parseInt(req.nextUrl.searchParams.get("limit") as string) || 10;
   const records = await GameResultService.findRecords(limit);
 
-  console.log({ limit });
   return NextResponse.json(
     records.map(({ _id, bestResult }) => ({
       params: _id,

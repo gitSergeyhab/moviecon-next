@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
-import {
-  Bebas_Neue,
-  Playfair_Display,
-  Special_Elite,
-  Libre_Baskerville,
-} from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import Header from "@/shared/components/Header/Header";
 import Footer from "@/shared/components/Footer/Footer";
 import { Provider } from "@/shared/components/Provider";

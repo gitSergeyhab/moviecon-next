@@ -27,10 +27,8 @@ export async function POST(request: NextRequest) {
       { status: 400 }
     );
   }
-  console.log({ user });
 
   const isPasswordValid = Crypt.compare(body.password, user.password);
-  console.log({ isPasswordValid });
 
   if (!isPasswordValid) {
     return NextResponse.json(
@@ -39,6 +37,5 @@ export async function POST(request: NextRequest) {
     );
   }
   const userWithTokens = getUserWithTokens(user);
-  console.log({ userWithTokens });
   return NextResponse.json(userWithTokens);
 }

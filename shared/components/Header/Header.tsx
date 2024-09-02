@@ -1,6 +1,6 @@
 "use client";
 
-import { MouseEventHandler, useState } from "react";
+import { MouseEventHandler, useEffect, useState } from "react";
 import { HeaderNav } from "./HeaderNav";
 import { NavMenuLink } from "./NavMenuLink";
 import { UserMenu } from "./UserMenu";
@@ -14,10 +14,19 @@ import appRoutes from "@/shared/lib/configs/routes/routes";
 import PopcornIcon from "../icons/popcorn";
 import { ToggleTheme } from "../ToggleTheme";
 import { cn } from "@/shared/lib/utils/styles";
+import { useAppDispatch } from "@/shared/hooks/useAppDispatch";
+import { fetchUser } from "@/shared/store/user/thunks";
 
 const Header = () => {
   const user = useSelector(userSelectors.getUser);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(fetchUser());
+    }
+  }, []);
 
   useCloseOnOutClick({
     noCloseDataId: "nav-menu",

@@ -1,15 +1,15 @@
 import jwt from "jsonwebtoken";
 import { UserRole } from "../../../types/user";
 
-const accessTime = "1h";
-const refreshTime = "10days";
+const ACCESS_TIME = "1h";
+const REFRESH_TIME = "10days";
 
 const secretKey = process.env.JWT_SECRET!;
 
 export type Token = "ACCESS" | "REFRESH";
 export const getToken = (id: string, role: UserRole, tokenType: Token) =>
   jwt.sign({ id, role }, secretKey, {
-    expiresIn: tokenType === "ACCESS" ? accessTime : refreshTime,
+    expiresIn: tokenType === "ACCESS" ? ACCESS_TIME : REFRESH_TIME,
   });
 
 export const getUserDataByToken = (token: string) => {

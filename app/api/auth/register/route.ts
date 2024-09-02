@@ -50,6 +50,5 @@ export async function POST(request: NextRequest) {
   });
 
   const userWithTokens = getUserWithTokens(user);
-  console.log({ userWithTokens });
   return NextResponse.json(userWithTokens);
 }

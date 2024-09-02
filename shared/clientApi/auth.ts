@@ -22,7 +22,6 @@ export const requestLogin$ = async (
   userData: UserLoginData
 ): Promise<UserWithTokens> => {
   const response = await request.post(getUrl(`login/`), userData);
-  console.log({ response });
   return response;
 };
 
