@@ -1,6 +1,5 @@
-import { GameDuration, GameType } from "@/types/game";
+import { GameCategory, GameDuration, GameType } from "@/types/game";
 import { GameResult, GameResultType, Sort } from "@/types/gameResult";
-import { Category } from "@/types/test";
 import { GameResultModel } from "../models/gameResult";
 
 interface Params {
@@ -22,7 +21,7 @@ interface FindUserResults {
   limit: number;
   sort: Sort;
   offset: number;
-  category: Category;
+  category: GameCategory;
   type: GameType;
   duration: GameDuration;
 }

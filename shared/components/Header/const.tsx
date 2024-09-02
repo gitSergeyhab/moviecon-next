@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { LogInIcon, LogOutIcon, UserIcon, UserPlus } from "lucide-react";
 import appRoutes from "@/shared/lib/configs/routes/routes";
+import { logout } from "@/shared/lib/utils/user";
 
 const { about, auth, gameSelection, profile, stats, admin } = appRoutes;
 
@@ -27,7 +28,7 @@ export const userMenuItems: UserMenuItem[] = [
     href: "#",
     icon: <LogOutIcon className={itemMenuClass} />,
     title: "Выйти",
-    onClick: () => console.log("logout"),
+    onClick: logout,
   },
 ];
 

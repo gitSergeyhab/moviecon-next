@@ -4,7 +4,7 @@ import {
   requestInfoLevel$,
   requestSkipQuestion$,
   requestStartLevel$,
-} from "@/shared/api/game";
+} from "@/shared/clientApi/game";
 import { ApiError } from "@/types/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../";

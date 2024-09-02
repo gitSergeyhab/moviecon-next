@@ -1,10 +1,5 @@
-import {
-  Level,
-  GameStatus,
-  LevelResult,
-  AnswerStatus,
-} from "@/types/game";
-import { request } from "./";
+import { Level, GameStatus, LevelResult, AnswerStatus } from "@/types/game";
+import { request } from ".";
 import { GameSelectionSchemaType } from "../schemas/gameSelection";
 import { ITest } from "@/types/test";
 

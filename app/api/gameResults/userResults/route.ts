@@ -1,7 +1,6 @@
 import { GameResultService } from "@/shared/lib/db/services/gameResultService";
-import { GameDuration, GameType } from "@/types/game";
+import { GameCategory, GameDuration, GameType } from "@/types/game";
 import { Sort } from "@/types/gameResult";
-import { Category } from "@/types/test";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -12,7 +11,7 @@ export async function GET(req: NextRequest) {
   const limit = parseInt(params.get("limit") as string) || 10;
   const offset = parseInt(params.get("offset") as string) || 0;
   const sort = (parseInt(params.get("sort") as string) as Sort) || -1;
-  const category = params.get("category") as Category;
+  const category = params.get("category") as GameCategory;
   const type = params.get("type") as GameType;
   const duration = params.get("duration") as GameDuration;
 

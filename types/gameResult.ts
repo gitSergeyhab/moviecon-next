@@ -1,10 +1,9 @@
 import { GameCategory, GameDuration, GameStatus, GameType } from "./game";
-import { Category } from "./test";
 
 export type GameResultStatus = Extract<GameStatus, "ENDED" | "LOST" | "WON">;
 
 export interface GameResult {
-  category: Category;
+  category: GameCategory;
   score: number;
   type: GameType;
   duration: GameDuration;
@@ -28,13 +27,13 @@ export interface GameResultDTO extends GameResult {
 export type Sort = 1 | -1;
 
 export type ResultsAggregateDict = Record<
-  Category,
+  GameCategory,
   Record<GameType, Record<GameDuration, GameResultType>>
 >;
 
 export type ResultsAggregateUserDict = Record<
   GameDuration,
-  Record<GameType, Record<Category, GameResultType>>
+  Record<GameType, Record<GameCategory, GameResultType>>
 >;
 
 export interface ResultParam {

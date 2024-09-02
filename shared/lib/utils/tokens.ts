@@ -4,7 +4,7 @@ import { UserRole } from "../../../types/user";
 const accessTime = "1h";
 const refreshTime = "10days";
 
-const secretKey = process.env.SECRET_KEY!;
+const secretKey = process.env.JWT_SECRET!;
 
 export type Token = "ACCESS" | "REFRESH";
 export const getToken = (id: string, role: UserRole, tokenType: Token) =>

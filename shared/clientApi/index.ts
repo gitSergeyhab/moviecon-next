@@ -33,6 +33,7 @@ const createRequestInstance = (addAuthHeader: boolean): AppApi => {
       };
       const { data, status } = response;
       const errors = data?.errors || [];
+      console.log({ error });
 
       const errorMessage = getErrorMessage(response);
 

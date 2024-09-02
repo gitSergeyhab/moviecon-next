@@ -1,4 +1,4 @@
-import { requestRecords$ } from "@/shared/api/gameResult";
+import { requestRecords$ } from "@/shared/clientApi/gameResult";
 import { useEffect, useState } from "react";
 import { LoadingStatus } from "@/types/ui";
 import { GameAggregateRecordClient } from "@/types/gameResult";

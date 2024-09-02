@@ -1,6 +1,7 @@
 import { Types } from "mongoose";
+import { GameCategory } from "./game";
 
-export type Category = "rus" | "ussr" | "world" | "all";
+// export type Category = "rus" | "ussr" | "world" | "all";
 
 export type AnswerType =
   | "OneMovieWithImage"
@@ -43,12 +44,12 @@ export interface ITest {
 }
 
 export interface ITestWithCategory extends ITest {
-  category: Category;
+  category: GameCategory;
 }
 
 export interface ITestFromDB extends ITest {
   _id: Types.ObjectId;
-  category: Category;
+  category: GameCategory;
 }
 
 export interface TestDTO extends Omit<ITestFromDB, "answer" | "_id"> {

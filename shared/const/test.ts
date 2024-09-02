@@ -1,8 +1,12 @@
-import { Category, TestType } from "@/types/test";
+import { GameCategory } from "@/types/game";
+import { TestType } from "@/types/test";
 
-export const TEST_CATEGORIES: Category[] = ["rus", "ussr", "world"];
+export const TEST_CATEGORIES: GameCategory[] = ["rus", "ussr", "world"];
 
-export const TEST_CATEGORIES_WITH_ALL: Category[] = ["all", ...TEST_CATEGORIES];
+export const TEST_CATEGORIES_WITH_ALL: GameCategory[] = [
+  "all",
+  ...TEST_CATEGORIES,
+];
 
 export const TEST_TYPES: TestType[] = [
   "FrameByMovie",

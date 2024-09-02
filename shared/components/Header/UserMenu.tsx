@@ -12,7 +12,6 @@ import { useCloseOnOutClick } from "@/shared/hooks/useCloseOnOutClick";
 export const UserMenu: FC = () => {
   const user = useSelector(userSelectors.getUser);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const router = useRouter();
 
   useCloseOnOutClick({
@@ -27,6 +26,14 @@ export const UserMenu: FC = () => {
 
   const menuItems = user ? userMenuItems : noAuthUserMenuItems;
   const src = user?.avatar;
+  const handleMenuItemClick = (href: string, onClick?: () => void) => {
+    if (onClick) {
+      onClick();
+    } else {
+      router.push(href);
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <div className="relative h-10">
@@ -36,7 +43,7 @@ export const UserMenu: FC = () => {
         type="button"
         aria-label="Меню пользователя"
         className={cn(
-          "border-neutral-800 dark:border-neutral-200  h-10 border-4 rounded-md px-3",
+          "border-neutral-800 dark:border-neutral-200  h-10 border-4 rounded-md px-3 ",
           "hover:text-orange-600 transition-colors duration-300"
         )}
       >
@@ -62,11 +69,12 @@ export const UserMenu: FC = () => {
           {menuItems.map(({ href, icon, title, onClick }) => (
             <button
               type="button"
+              data-no-close={"user-menu"}
               className={cn(
                 "bg-neutral-500/10 flex justify-between border-0 items-center h-10 min-w-40 px-2 rounded-none",
                 "transition-colors hover:bg-neutral-500/70"
               )}
-              onClick={onClick || (() => router.push(href))}
+              onClick={() => handleMenuItemClick(href, onClick)}
               key={title}
             >
               {title}

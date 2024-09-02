@@ -1,4 +1,4 @@
-import { requestUserRecords$ } from "@/shared/api/gameResult";
+import { requestUserRecords$ } from "@/shared/clientApi/gameResult";
 import { ApiError } from "@/types/api";
 import { UserAggregateRecords } from "@/types/gameResult";
 import { createAsyncThunk } from "@reduxjs/toolkit";

@@ -1,4 +1,4 @@
-import { request } from "./";
+import { request } from ".";
 
 export const requestTest = () => {
   return request.get("/test/public/");

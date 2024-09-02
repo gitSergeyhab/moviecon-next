@@ -2,9 +2,11 @@ import { z } from "zod";
 import { formConstants } from "./const";
 
 export const LoginSchema = z.object({
-  email: z.string().email({ message: "введите корректный email" }),
+  email: z
+    .string({ message: "введите email" })
+    .email({ message: "введите корректный email" }),
   password: z
-    .string()
+    .string({ message: "введите пароль" })
     .min(formConstants.password.min, {
       message: `минимальная длина: ${formConstants.password.min}`,
     })
