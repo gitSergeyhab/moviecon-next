@@ -1,5 +1,5 @@
-import { cn } from "@/shared/lib/utils/styles";
 import { FC, PropsWithChildren } from "react";
+import { cn } from "@/shared/lib/utils/styles";
 
 interface AppLinkProps extends PropsWithChildren {
   href: string;
