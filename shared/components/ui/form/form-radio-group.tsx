@@ -1,8 +1,8 @@
 import { Path, UseFormReturn } from "react-hook-form";
-import { Option } from "@/type/option";
-import { AnyDict } from "@/type/dict";
 import { cn } from "@/shared/lib/utils/styles";
 import { FormError } from "./form-error";
+import { AnyDict } from "@/types/dict";
+import { Option } from "@/types/option";
 
 export interface FormInputProps<T extends AnyDict> {
   form: UseFormReturn<T>;

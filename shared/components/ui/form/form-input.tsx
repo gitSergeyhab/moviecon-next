@@ -1,12 +1,11 @@
 import { UseFormReturn, Path } from "react-hook-form";
 import { Input } from "../input";
-import { AnyDict } from "@/type/dict";
 import { cn } from "@/shared/lib/utils/styles";
+import { AnyDict } from "@/types/dict";
 
 type InputType = "text" | "email" | "password";
 export interface FormInputProps<T extends AnyDict> {
   form: UseFormReturn<T>;
-  // options: RegisterOptions<T, Path<T>>;
   field: Path<T>;
   label?: string;
   className?: string;

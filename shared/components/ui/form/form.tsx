@@ -4,7 +4,7 @@ import { SubmitHandler, UseFormReturn } from "react-hook-form";
 import { PropsWithChildren } from "react";
 import { Button } from "../button";
 import { cn } from "@/shared/lib/utils/styles";
-import { AnyDict } from "@/type/dict";
+import { AnyDict } from "@/types/dict";
 
 interface FormProps<T extends AnyDict> extends PropsWithChildren {
   form: UseFormReturn<T>;
