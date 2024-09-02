@@ -1,8 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import {
+  Bebas_Neue,
+  Playfair_Display,
+  Special_Elite,
+  Libre_Baskerville,
+} from "next/font/google";
+import Header from "@/shared/components/Header/Header";
+import Footer from "@/shared/components/Footer/Footer";
+import { Provider } from "@/shared/components/Provider";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Playfair_Display({
+  subsets: ["latin", "cyrillic"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +25,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="ru">
+      <body className={font.className}>
+        <div
+          className={
+            "bg-neutral-400 bg-[url('/img/sd/big1.webp')] bg-no-repeat bg-cover  overflow-y-auto min-w-80 h-dvh hide-scrollbar"
+          }
+        >
+          <Provider>
+            <Header />
+            <main className="mt-12 md:mt-24">{children}</main>
+            <Footer />
+          </Provider>
+        </div>
+      </body>
     </html>
   );
 }
