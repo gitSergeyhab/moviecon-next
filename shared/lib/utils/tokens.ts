@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { UserRole } from "../../../types/user";
 
-const ACCESS_TIME = "1h";
+const ACCESS_TIME = "10m";
 const REFRESH_TIME = "10days";
 
 const secretKey = process.env.JWT_SECRET!;

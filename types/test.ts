@@ -1,8 +1,6 @@
 import { Types } from "mongoose";
 import { GameCategory } from "./game";
 
-// export type Category = "rus" | "ussr" | "world" | "all";
-
 export type AnswerType =
   | "OneMovieWithImage"
   | "OneMovieWithoutImage"
