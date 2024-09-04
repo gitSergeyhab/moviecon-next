@@ -26,14 +26,13 @@ export const ImageBlock: FC<IImageBlockProps> = ({ image, title }) => {
       >
         {title}
       </TitleText>
-
       <Image
         src={`${image}.webp`}
         width={1145}
         height={700}
         alt={title}
         className={cn(
-          "m-auto w-full text-center overflow-hidden rounded-lg shadow-2xl md:w-[90%]",
+          "m-auto text-center overflow-hidden rounded-lg shadow-2xl",
           "transition-opacity opacity-0 duration-1000 transform-gpu",
           inView ? "opacity-100 scale-100" : ""
         )}
