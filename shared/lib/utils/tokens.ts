@@ -13,14 +13,15 @@ export const getToken = (id: string, role: UserRole, tokenType: Token) =>
   });
 
 export const getUserDataByToken = (token: string) => {
+  // console.log({ token }, "getUserDataByToken");
   try {
     const idRole = jwt.verify(token, secretKey) as {
       id: string;
       role: UserRole;
     };
     return idRole;
-  } catch {
-    console.error("Error token: ", token);
+  } catch (err) {
+    console.error("Error token:", { err }, token);
     return null;
   }
 };

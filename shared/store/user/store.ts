@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "./const";
-import { UserInfo } from "@/types/user";
+import { UserInfoClient } from "@/types/user";
 import { LoadingStatus } from "@/types/ui";
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser(state, { payload }: PayloadAction<UserInfo>) {
+    setUser(state, { payload }: PayloadAction<UserInfoClient>) {
       state.user = payload;
     },
     clearUser(state) {

@@ -1,8 +1,8 @@
 import { LoadingStatus } from "@/types/ui";
-import { UserInfo } from "@/types/user";
+import { UserInfoClient } from "@/types/user";
 
 export interface UserState {
-  user: UserInfo | null;
+  user: UserInfoClient | null;
   status: LoadingStatus;
   error: null | string;
 }

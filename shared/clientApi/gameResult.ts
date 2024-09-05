@@ -24,10 +24,10 @@ export interface UserResultParams {
 export const requestUserResults$ = (
   query: Partial<UserResultParams>
 ): Promise<{ results: GameResult[]; totalCount: number }> =>
-  request.get(getUrl(`user-top?${createQueryString(query)}`));
+  request.get(getUrl(`userResults?${createQueryString(query)}`));
 
 export const requestUserRecords$ = (): Promise<UserAggregateRecords[]> =>
-  request.get(getUrl("user-best/"));
+  request.get(getUrl("userRecords/"));
 
 export const requestRecords$ = (
   limit: number

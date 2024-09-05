@@ -25,7 +25,7 @@ export interface UserInfoClient extends UserInfo {
   id: string;
 }
 
-export type UserWithTokens = UserInfo & { tokens: UserTokens };
+export type UserWithTokens = UserInfoClient & { tokens: UserTokens };
 
 export interface FullUserInfo extends UserWithTokens {
   password: string;
