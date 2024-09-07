@@ -35,4 +35,4 @@ export const requestRecords$ = (
   request.get(getUrl(`records?limit=${limit}`));
 
 export const requestScores$ = (): Promise<GameAggregateScores[]> =>
-  request.get(getUrl(`scores`));
+  request.get(getUrl(`scores/`));

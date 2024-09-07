@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/shared/lib/utils/styles";
 import {
   PrimaryHeader,
@@ -9,8 +10,10 @@ import { FeatureListItem } from "./FeatureListItem";
 import { ImagesSection } from "./ImagesSection";
 import { MainTableSection } from "./MainTablesSection";
 import { StartLink } from "./StartLink";
+import { useFetchUser } from "@/shared/hooks/useFetchUser";
 
 export default function MainPage() {
+  useFetchUser();
   return (
     <div className="bg-neutral-200/30 dark:bg-neutral-800/30 flex flex-wrap max-w-[1400px] mx-auto p-8 pb-12 px-2 rounded-lg gap-4 md:p-16 sm:pb-16">
       <div className="w-full col-span-2 rounded-lg">

@@ -1,24 +1,23 @@
-import { headers } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { UserService } from "@/shared/lib/db/services/userService";
 import { toUserDTO } from "@/shared/lib/utils/adapters/user";
-import { getNewTokens, getUserDataByToken } from "@/shared/lib/utils/tokens";
+import { cookies } from "next/headers";
+import { decrypt } from "@/shared/lib/utils/session";
+import { SessionPayload } from "@/types/session";
 
-export async function GET() {
-  const authorizationHeader = headers().get("Authorization") || "";
-  console.log({
-    authorizationHeader,
-  });
-  const token = authorizationHeader.split(" ")[1];
-  const userData = getUserDataByToken(token);
+export async function GET(req: NextRequest) {
+  const cookie = cookies().get("session")?.value;
+  const userData = (await decrypt(cookie)) as SessionPayload | undefined;
 
   if (!userData) {
-    return null;
+    return NextResponse.json(null);
   }
-  const user = await UserService.findById(userData?.id);
+
+  const user = await UserService.findById(userData.userId);
+
   if (!user) {
-    return null;
+    return NextResponse.json(null);
   }
-  const newTokens = getNewTokens(userData.id, userData.role);
-  return NextResponse.json({ ...toUserDTO(user), tokens: newTokens });
+
+  return NextResponse.json(toUserDTO(user));
 }

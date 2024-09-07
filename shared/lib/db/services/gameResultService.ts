@@ -1,6 +1,7 @@
 import { GameCategory, GameDuration, GameType } from "@/types/game";
 import { GameResult, GameResultType, Sort } from "@/types/gameResult";
 import { GameResultModel } from "../models/gameResult";
+import dbConnect from "../dbConnect";
 
 interface Params {
   duration: string;
@@ -91,6 +92,30 @@ export class GameResultService {
     return { results, totalCount };
   }
 
+  static async getScoreList(): Promise<GetStoreList[]> {
+    dbConnect(); // без этого почему-то MongooseError: Operation `gameresults.aggregate()` buffering timed out after 10000ms
+    return await GameResultModel.aggregate([
+      {
+        $group: {
+          _id: {
+            duration: "$duration",
+            type: "$type",
+            category: "$category",
+          },
+          scores: { $push: "$score" }, // Массив с оценками
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          scores: {
+            $sortArray: { input: "$scores", sortBy: 1 }, // Сортировка массива по возрастанию
+          },
+        },
+      },
+    ]);
+  }
+
   static async findRecords(limit = 10): Promise<AggregatedRecord[]> {
     return await GameResultModel.aggregate([
       {
@@ -115,27 +140,48 @@ export class GameResultService {
     ]);
   }
 
-  static async getScoreList(): Promise<GetStoreList[]> {
-    return await GameResultModel.aggregate([
-      {
-        $sort: { score: 1 },
-      },
-      {
-        $group: {
-          _id: {
-            duration: "$duration",
-            type: "$type",
-            category: "$category",
-          },
-          scores: { $push: "$score" },
-        },
-      },
-      {
-        $project: {
-          _id: 1,
-          scores: 1,
-        },
-      },
-    ]);
-  }
+  // static async getScoreList(): Promise<GetStoreList[]> {
+  //   return await GameResultModel.aggregate([
+  //     {
+  //       $sort: { score: 1 },
+  //     },
+  //     {
+  //       $group: {
+  //         _id: {
+  //           duration: "$duration",
+  //           type: "$type",
+  //           category: "$category",
+  //         },
+  //         scores: { $push: "$score" },
+  //       },
+  //     },
+  //     {
+  //       $project: {
+  //         _id: 1,
+  //         scores: 1,
+  //       },
+  //     },
+  //   ]);
+  // }
+
+  // static async getScoreList(): Promise<GetStoreList[]> {
+  //   return await GameResultModel.aggregate([
+  //     {
+  //       $group: {
+  //         _id: {
+  //           duration: "$duration",
+  //           type: "$type",
+  //           category: "$category",
+  //         },
+  //         scores: { $push: "$score" },
+  //       },
+  //     },
+  //     {
+  //       $project: {
+  //         _id: 1,
+  //         scores: 1,
+  //       },
+  //     },
+  //   ]);
+  // }
 }

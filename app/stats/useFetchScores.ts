@@ -1,7 +1,7 @@
-import { requestScores$ } from "@/lib/api/gameResult";
 import { useEffect, useState } from "react";
-import { LoadingStatus } from "@/type/ui";
-import { GameAggregateScores } from "@/type/game-results";
+import { requestScores$ } from "@/shared/clientApi/gameResult";
+import { GameAggregateScores } from "@/types/gameResult";
+import { LoadingStatus } from "@/types/ui";
 
 export const useFetchScores = () => {
   const [scores, setScores] = useState<GameAggregateScores[]>([]);

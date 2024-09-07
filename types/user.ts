@@ -1,9 +1,5 @@
 export type UserRole = "USER" | "ADMIN";
 
-export interface UserTokens {
-  access: string;
-  refresh: string;
-}
 export interface UserLoginData {
   email: string;
   password: string;
@@ -23,12 +19,6 @@ export interface UserInfo {
 }
 export interface UserInfoClient extends UserInfo {
   id: string;
-}
-
-export type UserWithTokens = UserInfoClient & { tokens: UserTokens };
-
-export interface FullUserInfo extends UserWithTokens {
-  password: string;
 }
 
 export interface UserDTO {

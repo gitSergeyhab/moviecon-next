@@ -1,7 +1,5 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { ApiError, ApiResponse, AppApi } from "@/types/api";
-import TokenService from "@/shared/lib/utils/storageServices/tokenService";
-import { refreshToken } from "./refreshToken";
 import { getErrorMessage } from "../lib/utils/errors";
 import appRoutes from "../lib/configs/routes/routes";
 
@@ -18,12 +16,6 @@ const createRequestInstance = (addAuthHeader: boolean): AppApi => {
     headers: defaultHeaders,
   });
 
-  if (addAuthHeader) {
-    instance.interceptors.request.use((request) => {
-      request.headers["Authorization"] = `Bearer ${TokenService.accessToken}`;
-      return request;
-    });
-  }
   instance.interceptors.response.use(
     (response) => response.data,
     async (error: AxiosError) => {
@@ -38,20 +30,8 @@ const createRequestInstance = (addAuthHeader: boolean): AppApi => {
       const errorMessage = getErrorMessage(response);
 
       if (status === 401) {
-        const tokens = await refreshToken();
-        const requestParams = config as ErrorConfig;
-
-        if (!tokens || requestParams.is401) {
-          TokenService.logout();
-          window.location.pathname = appRoutes.auth.login;
-          return;
-        }
-
-        requestParams.is401 = true;
-        if (tokens) {
-          TokenService.login(tokens);
-        }
-        return await instance.request(requestParams);
+        window.location.pathname = appRoutes.auth.login;
+        return;
       }
 
       const apiError: ApiError = {

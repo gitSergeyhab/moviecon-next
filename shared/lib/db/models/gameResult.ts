@@ -20,5 +20,8 @@ const GameResultSchema = new Schema<GameResultType>(
   { timestamps: true }
 );
 
+GameResultSchema.index({ score: 1 });
+GameResultSchema.index({ category: 1, type: 1, duration: 1 });
+
 export const GameResultModel =
   models.GameResult || model("GameResult", GameResultSchema);

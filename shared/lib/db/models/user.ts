@@ -1,9 +1,10 @@
 import { Document, Schema, models, model } from "mongoose";
-import { FullUserInfo } from "@/types/user";
+import { UserInfo } from "@/types/user";
 
-export interface UserType extends FullUserInfo, Document {
+export interface UserType extends UserInfo, Document {
   createdAt: Date;
   updatedAt: Date;
+  password: string;
 }
 
 export interface UserTypeWithId extends UserType {
