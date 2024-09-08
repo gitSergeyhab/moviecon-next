@@ -1,5 +1,5 @@
 import { GameResultService } from "@/shared/lib/db/services/gameResultService";
-import { toGameResultDTO } from "@/shared/lib/utils/adapters/gameResult";
+import { toGameResultClient } from "@/shared/lib/utils/adapters/gameResult";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   return NextResponse.json(
     records.map(({ _id, bestResult }) => ({
       params: _id,
-      bestResult: bestResult.map(toGameResultDTO),
+      bestResult: bestResult.map(toGameResultClient),
     }))
   );
 }

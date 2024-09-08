@@ -5,9 +5,9 @@ import {
   GAME_TYPES,
 } from "@/shared/const/game";
 import { TEST_CATEGORIES_WITH_ALL } from "@/shared/const/test";
-import { GameResultType } from "@/types/gameResult";
+import { GameResultServer } from "@/types/gameResult";
 
-const GameResultSchema = new Schema<GameResultType>(
+const GameResultSchema = new Schema<GameResultServer>(
   {
     category: { type: String, enum: TEST_CATEGORIES_WITH_ALL, required: true },
     score: { type: Number, required: true },

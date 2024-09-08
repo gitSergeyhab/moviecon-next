@@ -4,7 +4,6 @@ interface Result {
   isUser?: boolean;
 }
 export const generateHistogramData = (data: number[], userRecord: number) => {
-  console.log({ data, userRecord });
   if (!data.length || !userRecord) {
     console.error("нет данных для графика");
     return null;

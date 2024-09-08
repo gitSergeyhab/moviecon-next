@@ -1,5 +1,6 @@
 import appRoutes from "@/shared/lib/configs/routes/routes";
 import { GameResultService } from "@/shared/lib/db/services/gameResultService";
+import { toGameResultClient } from "@/shared/lib/utils/adapters/gameResult";
 import { decrypt } from "@/shared/lib/utils/session";
 import { GameCategory, GameDuration, GameType } from "@/types/game";
 import { Sort } from "@/types/gameResult";
@@ -23,7 +24,7 @@ export async function GET(req: NextRequest) {
   const type = params.get("type") as GameType;
   const duration = params.get("duration") as GameDuration;
 
-  const result = await GameResultService.findUserResults({
+  const { results, totalCount } = await GameResultService.findUserResults({
     category,
     duration,
     type,
@@ -32,5 +33,8 @@ export async function GET(req: NextRequest) {
     offset,
     sort,
   });
-  return NextResponse.json(result);
+  return NextResponse.json({
+    results: results.map(toGameResultClient),
+    totalCount,
+  });
 }

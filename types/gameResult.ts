@@ -12,13 +12,13 @@ export interface GameResult {
   status: GameResultStatus;
 }
 
-export interface GameResultType extends GameResult, Document {
+export interface GameResultServer extends GameResult {
   createdAt: Date;
   updatedAt: Date;
   _id: string;
 }
 
-export interface GameResultDTO extends GameResult {
+export interface GameResultClient extends GameResult {
   createdAt: Date;
   updatedAt: Date;
   id: string;
@@ -28,12 +28,12 @@ export type Sort = 1 | -1;
 
 export type ResultsAggregateDict = Record<
   GameCategory,
-  Record<GameType, Record<GameDuration, GameResultType>>
+  Record<GameType, Record<GameDuration, GameResultServer>>
 >;
 
 export type ResultsAggregateUserDict = Record<
   GameDuration,
-  Record<GameType, Record<GameCategory, GameResultType>>
+  Record<GameType, Record<GameCategory, GameResultServer>>
 >;
 
 export interface ResultParam {
@@ -44,7 +44,7 @@ export interface ResultParam {
 
 export interface UserAggregateRecords {
   params: ResultParam;
-  bestResult: GameResult;
+  bestResult: GameResultClient;
 }
 
 export interface GameAggregateRecord {
@@ -54,7 +54,7 @@ export interface GameAggregateRecord {
 
 export interface GameAggregateRecordClient {
   params: ResultParam;
-  bestResult: GameResultDTO[];
+  bestResult: GameResultClient[];
 }
 export interface GameAggregateScores {
   params: ResultParam;

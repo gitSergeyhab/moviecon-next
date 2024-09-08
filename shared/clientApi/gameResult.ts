@@ -1,9 +1,9 @@
 import { GameCategory, GameDuration, GameType } from "@/types/game";
-import { request } from ".";
+import { request } from "./";
 import {
   GameAggregateRecordClient,
   GameAggregateScores,
-  GameResult,
+  GameResultClient,
   UserAggregateRecords,
 } from "@/types/gameResult";
 import { createQueryString } from "../lib/utils/query";
@@ -23,7 +23,7 @@ export interface UserResultParams {
 
 export const requestUserResults$ = (
   query: Partial<UserResultParams>
-): Promise<{ results: GameResult[]; totalCount: number }> =>
+): Promise<{ results: GameResultClient[]; totalCount: number }> =>
   request.get(getUrl(`userResults?${createQueryString(query)}`));
 
 export const requestUserRecords$ = (): Promise<UserAggregateRecords[]> =>

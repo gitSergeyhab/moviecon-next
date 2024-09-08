@@ -5,6 +5,5 @@ const url = "/auth/";
 
 export const requestUser$ = async (): Promise<UserInfoClient> => {
   const response = await request.get(url);
-  console.log({ response }, "requestUser");
   return response;
 };

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title,
 };
 
-export default function AuthLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;

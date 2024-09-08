@@ -1,5 +1,5 @@
 import { GameCategory, GameDuration, GameType } from "@/types/game";
-import { GameResult, GameResultType, Sort } from "@/types/gameResult";
+import { GameResult, GameResultServer, Sort } from "@/types/gameResult";
 import { GameResultModel } from "../models/gameResult";
 import dbConnect from "../dbConnect";
 
@@ -10,12 +10,12 @@ interface Params {
 }
 interface AggregatedUserRecord {
   _id: Params;
-  bestResult: GameResultType;
+  bestResult: GameResultServer;
 }
 
 interface AggregatedRecord {
   _id: Params;
-  bestResult: GameResultType[];
+  bestResult: GameResultServer[];
 }
 interface FindUserResults {
   userId: string;
@@ -27,18 +27,18 @@ interface FindUserResults {
   duration: GameDuration;
 }
 
-interface GetStoreList {
+interface ScoreList {
   _id: Params;
   scores: number[];
 }
 
 export class GameResultService {
-  static async create(result: GameResult): Promise<GameResultType> {
+  static async create(result: GameResult): Promise<GameResultServer> {
     const cratedResult = await GameResultModel.create(result);
     return cratedResult.toObject();
   }
 
-  static async findById(id: string): Promise<GameResultType | null> {
+  static async findById(id: string): Promise<GameResultServer | null> {
     return await GameResultModel.findById(id);
   }
 
@@ -60,11 +60,14 @@ export class GameResultService {
           bestResult: { $first: "$$ROOT" },
         },
       },
+      {
+        $sort: { "bestResult.score": -1 },
+      },
     ]);
   }
   static async findUserResults(
     data: FindUserResults
-  ): Promise<{ results: GameResultType[]; totalCount: number }> {
+  ): Promise<{ results: GameResultServer[]; totalCount: number }> {
     const { category, type, duration, userId, limit, offset, sort } = data;
 
     const filter: Record<string, string> = { userId };
@@ -92,7 +95,7 @@ export class GameResultService {
     return { results, totalCount };
   }
 
-  static async getScoreList(): Promise<GetStoreList[]> {
+  static async getScoreList(): Promise<ScoreList[]> {
     dbConnect(); // без этого почему-то MongooseError: Operation `gameresults.aggregate()` buffering timed out after 10000ms
     return await GameResultModel.aggregate([
       {
@@ -102,7 +105,7 @@ export class GameResultService {
             type: "$type",
             category: "$category",
           },
-          scores: { $push: "$score" }, // Массив с оценками
+          scores: { $push: "$score" },
         },
       },
       {
@@ -139,49 +142,4 @@ export class GameResultService {
       },
     ]);
   }
-
-  // static async getScoreList(): Promise<GetStoreList[]> {
-  //   return await GameResultModel.aggregate([
-  //     {
-  //       $sort: { score: 1 },
-  //     },
-  //     {
-  //       $group: {
-  //         _id: {
-  //           duration: "$duration",
-  //           type: "$type",
-  //           category: "$category",
-  //         },
-  //         scores: { $push: "$score" },
-  //       },
-  //     },
-  //     {
-  //       $project: {
-  //         _id: 1,
-  //         scores: 1,
-  //       },
-  //     },
-  //   ]);
-  // }
-
-  // static async getScoreList(): Promise<GetStoreList[]> {
-  //   return await GameResultModel.aggregate([
-  //     {
-  //       $group: {
-  //         _id: {
-  //           duration: "$duration",
-  //           type: "$type",
-  //           category: "$category",
-  //         },
-  //         scores: { $push: "$score" },
-  //       },
-  //     },
-  //     {
-  //       $project: {
-  //         _id: 1,
-  //         scores: 1,
-  //       },
-  //     },
-  //   ]);
-  // }
 }
